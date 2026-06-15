@@ -22,17 +22,17 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--bg-soft);
+            background: var(--bg);
             color: var(--text);
             line-height: 1.6;
         }
 
-        .container { max-width: 1100px; margin: 0 auto; background: var(--bg); min-height: 100vh; }
+        .container { max-width: 100%; margin: 0 auto; background: var(--bg); min-height: 100vh; }
 
         /* NAV */
         nav {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 0 60px; height: 64px;
+            padding: 0 80px; height: 64px;
             border-bottom: 1px solid var(--border);
             position: sticky; top: 0; background: var(--bg); z-index: 100;
         }
@@ -54,39 +54,47 @@
         }
         .nav-icon:hover { border-color: var(--blue); color: var(--blue); }
 
-        /* HERO */
+        /* HERO — centrato */
         .hero {
-            padding: 80px 60px 72px;
+            padding: 80px 80px 72px;
             border-bottom: 1px solid var(--border);
-            display: flex; align-items: center; gap: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 24px;
+            background: linear-gradient(180deg, var(--blue-light) 0%, var(--bg) 100%);
         }
         .hero-photo {
-            width: 120px; height: 120px; border-radius: 50%; flex-shrink: 0;
+            width: 140px; height: 140px; border-radius: 50%; flex-shrink: 0;
             background: var(--blue-light);
-            border: 3px solid var(--blue);
+            border: 4px solid var(--blue);
             display: flex; align-items: center; justify-content: center;
             font-size: 2.5rem; color: var(--blue);
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(4,146,194,0.18);
         }
-        .hero-text { flex: 1; }
+        .hero-photo img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+        .hero-text { max-width: 680px; }
         .hero-tag {
             display: inline-block; padding: 4px 12px;
             background: var(--blue-light); color: var(--blue-dark);
             border-radius: 20px; font-size: 0.78rem; font-weight: 600;
             letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 16px;
         }
-        h1 { font-size: 2.6rem; font-weight: 700; letter-spacing: -0.8px; margin-bottom: 8px; line-height: 1.1; }
-        .hero-role { font-size: 1.15rem; color: var(--blue); font-weight: 500; margin-bottom: 16px; }
-        .hero-desc { font-size: 0.95rem; color: var(--text-muted); max-width: 520px; line-height: 1.75; }
-        .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+        h1 { font-size: 2.8rem; font-weight: 700; letter-spacing: -0.8px; margin-bottom: 8px; line-height: 1.1; }
+        .hero-role { font-size: 1.15rem; color: var(--blue); font-weight: 500; margin-bottom: 16px; min-height: 1.5em; }
+        .hero-desc { font-size: 0.95rem; color: var(--text-muted); line-height: 1.75; }
+        .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; justify-content: center; }
         .badge {
-            padding: 5px 12px; background: var(--bg-soft);
+            padding: 5px 12px; background: var(--bg);
             border: 1px solid var(--border); border-radius: 6px;
             font-size: 0.8rem; font-weight: 500; color: var(--text-muted);
         }
 
         /* MAIN LAYOUT */
-        .main { display: grid; grid-template-columns: 1fr 300px; gap: 0; }
-        .left { padding: 60px; border-right: 1px solid var(--border); }
+        .main { display: grid; grid-template-columns: 1fr 300px; gap: 0; max-width: 1200px; margin: 0 auto; }
+        .left { padding: 60px 60px 60px 80px; border-right: 1px solid var(--border); }
         .right { padding: 48px 40px; }
 
         /* SECTIONS */
@@ -113,7 +121,8 @@
         .exp-desc ul { padding-left: 16px; }
 
         /* EDUCATION */
-        .edu-item { margin-bottom: 20px; }
+        .edu-item { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+        .edu-item:last-child { border-bottom: none; }
         .edu-degree { font-size: 0.92rem; font-weight: 600; }
         .edu-uni { font-size: 0.83rem; color: var(--blue); font-weight: 500; }
         .edu-date { font-size: 0.78rem; color: var(--text-muted); }
@@ -139,9 +148,9 @@
         .pub-title { font-size: 0.78rem; font-weight: 600; color: var(--text); margin-bottom: 2px; }
         .pub-journal { font-size: 0.74rem; color: var(--blue); }
 
-        /* CONTACT FOOTER */
+        /* FOOTER */
         .footer-contact {
-            padding: 48px 60px; background: var(--text);
+            padding: 48px 80px; background: var(--text);
             display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;
         }
         .footer-contact p { color: #8899aa; font-size: 0.88rem; }
@@ -149,7 +158,7 @@
         .footer-contact a:hover { color: var(--blue); }
 
         @media (max-width: 900px) {
-            .hero { flex-direction: column; padding: 48px 30px; gap: 30px; }
+            .hero { padding: 48px 30px; }
             .main { grid-template-columns: 1fr; }
             .left { padding: 40px 30px; border-right: none; border-bottom: 1px solid var(--border); }
             .right { padding: 40px 30px; }
@@ -174,18 +183,18 @@
         <div class="nav-icons">
             <a href="mailto:idris.vruzhaj@gmail.com" class="nav-icon"><i class="fas fa-envelope"></i></a>
             <a href="#" class="nav-icon"><i class="fab fa-linkedin"></i></a>
-            <a href="#" class="nav-icon"><i class="fab fa-github"></i></a>
+            <a href="https://github.com/vforvuzzi" class="nav-icon"><i class="fab fa-github"></i></a>
         </div>
     </nav>
 
     <div class="hero">
         <div class="hero-photo">
-    <img src="IMG-20250227-WA0021.jpg" alt="Idris Vruzhaj" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+            <img src="IMG-20250227-WA0021.jpg" alt="Idris Vruzhaj">
         </div>
         <div class="hero-text">
             <div class="hero-tag">Open to opportunities</div>
             <h1>Idris Vruzhaj, Ph.D</h1>
-            <div class="hero-role" id="typed-role">Biotechnologist → Bioinformatician</div>
+            <div class="hero-role" id="typed-role"></div>
             <p class="hero-desc">
                 Ph.D. in Pharmacological Sciences with hands-on experience in NGS pipelines, genome assembly, and computational infrastructure. Transitioning into bioinformatics with a strong biological foundation and active self-directed learning in data analysis and machine learning.
             </p>
@@ -194,6 +203,7 @@
                 <span class="badge">🐧 Linux / HPC</span>
                 <span class="badge">🐍 Python</span>
                 <span class="badge">🐳 Docker</span>
+                <span class="badge">⚙️ Nextflow</span>
                 <span class="badge">📍 Porcia, Italy</span>
             </div>
         </div>
@@ -298,7 +308,7 @@
                 <div class="contact-item"><i class="fas fa-envelope"></i><a href="mailto:idris.vruzhaj@gmail.com">idris.vruzhaj@gmail.com</a></div>
                 <div class="contact-item"><i class="fas fa-phone"></i>+39 345 076 1301</div>
                 <div class="contact-item"><i class="fas fa-map-marker-alt"></i>Porcia (PN), Italy</div>
-                <div class="contact-item"><i class="fab fa-github"></i><a href="#">github.com/yourusername</a></div>
+                <div class="contact-item"><i class="fab fa-github"></i><a href="https://github.com/vforvuzzi">github.com/vforvuzzi</a></div>
                 <div class="contact-item"><i class="fab fa-linkedin"></i><a href="#">LinkedIn</a></div>
             </div>
 
@@ -370,7 +380,7 @@
         </div>
         <div style="display:flex; gap: 16px;">
             <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
-            <a href="#"><i class="fab fa-github"></i> GitHub</a>
+            <a href="https://github.com/vforvuzzi"><i class="fab fa-github"></i> GitHub</a>
         </div>
     </div>
 
