@@ -1,174 +1,408 @@
-\documentclass[11pt, a4paper]{article} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idris Vruzhaj — Bioinformatician</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-\usepackage[T1]{fontenc}     
-\usepackage[utf8]{inputenc}  
-\usepackage[british]{babel}  
-\usepackage[left = 0mm, right = 0mm, top = 0mm, bottom = 0mm]{geometry}
-\usepackage[stretch = 25, shrink = 25, tracking=true, letterspace=30]{microtype}  
-\usepackage{graphicx}        
-\usepackage{xcolor}          
-\usepackage{marvosym}        
+        :root {
+            --blue: #0492C2;
+            --blue-dark: #036a91;
+            --blue-light: #e8f6fb;
+            --text: #1a2332;
+            --text-muted: #5a6a7a;
+            --border: #e2e8f0;
+            --bg: #ffffff;
+            --bg-soft: #f8fafc;
+        }
 
-\usepackage{enumitem}        
-\setlist{parsep = 0pt, topsep = 0pt, partopsep = 1pt, itemsep = 1pt, leftmargin = 6mm}
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-soft);
+            color: var(--text);
+            line-height: 1.6;
+        }
 
-\usepackage{FiraSans}        
-\renewcommand{\familydefault}{\sfdefault}
+        .container { max-width: 1100px; margin: 0 auto; background: var(--bg); min-height: 100vh; }
 
-\definecolor{cvblue}{HTML}{0492C2}
+        /* NAV */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 60px; height: 64px;
+            border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; background: var(--bg); z-index: 100;
+        }
+        .nav-logo { font-weight: 600; font-size: 1rem; color: var(--text); letter-spacing: -0.3px; }
+        .nav-logo span { color: var(--blue); }
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a {
+            color: var(--text-muted); text-decoration: none; font-size: 0.9rem;
+            font-weight: 500; transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--blue); }
+        .nav-icons { display: flex; gap: 10px; }
+        .nav-icon {
+            width: 36px; height: 36px; border-radius: 8px;
+            border: 1px solid var(--border); background: var(--bg);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text-muted); text-decoration: none; font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .nav-icon:hover { border-color: var(--blue); color: var(--blue); }
 
-\newcommand{\dates}[1]{\hfill\mbox{\textbf{#1}}} 
-\newcommand{\is}{\par\vskip.5ex plus .4ex} 
-\newcommand{\smaller}[1]{{\small$\diamond$\ #1}}
-\newcommand{\headleft}[1]{\vspace*{3ex}\textsc{\textbf{#1}}\par%
-    \vspace*{-1.5ex}\hrulefill\par\vspace*{0.7ex}}
-\newcommand{\headright}[1]{\vspace*{2.5ex}\textsc{\Large\color{cvblue}#1}\par%
-     \vspace*{-2ex}{\color{cvblue}\hrulefill}\par}
+        /* HERO */
+        .hero {
+            padding: 80px 60px 72px;
+            border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; gap: 60px;
+        }
+        .hero-photo {
+            width: 120px; height: 120px; border-radius: 50%; flex-shrink: 0;
+            background: var(--blue-light);
+            border: 3px solid var(--blue);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.5rem; color: var(--blue);
+        }
+        .hero-text { flex: 1; }
+        .hero-tag {
+            display: inline-block; padding: 4px 12px;
+            background: var(--blue-light); color: var(--blue-dark);
+            border-radius: 20px; font-size: 0.78rem; font-weight: 600;
+            letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 16px;
+        }
+        h1 { font-size: 2.6rem; font-weight: 700; letter-spacing: -0.8px; margin-bottom: 8px; line-height: 1.1; }
+        .hero-role { font-size: 1.15rem; color: var(--blue); font-weight: 500; margin-bottom: 16px; }
+        .hero-desc { font-size: 0.95rem; color: var(--text-muted); max-width: 520px; line-height: 1.75; }
+        .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+        .badge {
+            padding: 5px 12px; background: var(--bg-soft);
+            border: 1px solid var(--border); border-radius: 6px;
+            font-size: 0.8rem; font-weight: 500; color: var(--text-muted);
+        }
 
-\usepackage[colorlinks = true, urlcolor = white, linkcolor = white]{hyperref}
+        /* MAIN LAYOUT */
+        .main { display: grid; grid-template-columns: 1fr 300px; gap: 0; }
+        .left { padding: 60px; border-right: 1px solid var(--border); }
+        .right { padding: 48px 40px; }
 
-\begin{document}
+        /* SECTIONS */
+        .section { margin-bottom: 56px; }
+        .section-title {
+            font-size: 0.75rem; font-weight: 600; letter-spacing: 1.2px;
+            text-transform: uppercase; color: var(--blue);
+            margin-bottom: 28px; padding-bottom: 10px;
+            border-bottom: 2px solid var(--blue-light);
+        }
 
-\setlength{\topskip}{0pt}
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{0pt}
-\setlength{\fboxsep}{0pt}
-\pagestyle{empty}
-\raggedbottom
+        /* EXPERIENCE */
+        .exp-item { margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+        .exp-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
+        .exp-title { font-size: 1rem; font-weight: 600; color: var(--text); }
+        .exp-date {
+            font-size: 0.78rem; color: var(--blue-dark); font-weight: 500;
+            background: var(--blue-light); padding: 3px 10px; border-radius: 4px; white-space: nowrap;
+        }
+        .exp-company { font-size: 0.88rem; color: var(--blue); font-weight: 500; margin-bottom: 10px; }
+        .exp-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
+        .exp-desc li { margin-bottom: 4px; padding-left: 4px; }
+        .exp-desc ul { padding-left: 16px; }
 
-\begin{minipage}[t]{0.33\textwidth} 
-\colorbox{cvblue!89}{\begin{minipage}[t][5mm][t]{\textwidth}\null\hfill\null\end{minipage}}
+        /* EDUCATION */
+        .edu-item { margin-bottom: 20px; }
+        .edu-degree { font-size: 0.92rem; font-weight: 600; }
+        .edu-uni { font-size: 0.83rem; color: var(--blue); font-weight: 500; }
+        .edu-date { font-size: 0.78rem; color: var(--text-muted); }
+        .edu-thesis { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; font-style: italic; }
 
-\vspace{-.2ex} 
-\colorbox{cvblue!90}{\color{white}  
-\kern0.09\textwidth\relax
-\begin{minipage}[t][293mm][t]{0.82\textwidth}
-\raggedright
-\vspace*{2.5ex}
+        /* RIGHT SIDEBAR */
+        .skill-group { margin-bottom: 28px; }
+        .skill-group-title { font-size: 0.78rem; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+        .skill-list { display: flex; flex-wrap: wrap; gap: 6px; }
+        .skill-pill {
+            padding: 4px 10px; font-size: 0.78rem; font-weight: 500;
+            border-radius: 5px; background: var(--bg-soft); border: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+        .skill-pill.highlight { background: var(--blue-light); border-color: #b3dff0; color: var(--blue-dark); }
 
-\Large Idris \textbf{\textsc{Vruzhaj}}, Ph.D \normalsize[cite: 3]
+        .contact-item { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 0.85rem; color: var(--text-muted); }
+        .contact-item i { color: var(--blue); width: 16px; text-align: center; }
+        .contact-item a { color: var(--text-muted); text-decoration: none; }
+        .contact-item a:hover { color: var(--blue); }
 
-% ── PHOTO PLACEHOLDER ──
-% Sostituisci "placeholder-foto.png" con il nome del file della tua foto
-\vspace*{1.5ex}
-\null\hfill\includegraphics[width=0.65\textwidth]{placeholder-foto.png}\hfill\null
-\vspace*{1.5ex}
+        .pub-item { margin-bottom: 14px; padding: 12px; background: var(--bg-soft); border-radius: 8px; border: 1px solid var(--border); }
+        .pub-title { font-size: 0.78rem; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+        .pub-journal { font-size: 0.74rem; color: var(--blue); }
 
-\headleft{Profile}
-\small
-Biotechnologist with a Ph.D. in Pharmacological Sciences, specialized in managing complex projects and developing innovative solutions. My experience, gained in a multicultural environment, has refined my adaptability, flexibility, and interdisciplinary collaboration skills. I possess a strong foundation in biological sciences, combined with a strong problem-solving mindset and data analysis proficiency. I am currently seeking a transition to the bioinformatics field, where my focus is to leverage my expertise for advanced analysis of biological data.
-\normalsize
+        /* CONTACT FOOTER */
+        .footer-contact {
+            padding: 48px 60px; background: var(--text);
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;
+        }
+        .footer-contact p { color: #8899aa; font-size: 0.88rem; }
+        .footer-contact a { color: #fff; text-decoration: none; font-size: 0.88rem; font-weight: 500; }
+        .footer-contact a:hover { color: var(--blue); }
 
-\headleft{Contact}
-\small 
-\MVAt\ {\small idris.vruzhaj@gmail.com} \\[0.4ex][cite: 3]
-\Mobilefone\ +39\,345\,076\,1301 \\[0.5ex][cite: 3]
-\Mundus\ \href{https://github.com/yourusername}{github.com/yourusername} \\[0.1ex][cite: 3]
-\Letter\ Corso Italia 62, Porcia (PN) 33080[cite: 3]
-\normalsize
+        @media (max-width: 900px) {
+            .hero { flex-direction: column; padding: 48px 30px; gap: 30px; }
+            .main { grid-template-columns: 1fr; }
+            .left { padding: 40px 30px; border-right: none; border-bottom: 1px solid var(--border); }
+            .right { padding: 40px 30px; }
+            nav { padding: 0 30px; }
+            .nav-links { display: none; }
+            .footer-contact { padding: 40px 30px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
 
-\headleft{Personal information}
-Citizenship: \textbf{Italian} \\[0.5ex][cite: 3]
-Languages: \textbf{English}~(B2), \textbf{Italian}~(C2), \textbf{Albanian}~(native)[cite: 3]
+    <nav>
+        <div class="nav-logo">Idris <span>Vruzhaj</span></div>
+        <div class="nav-links">
+            <a href="#experience">Experience</a>
+            <a href="#education">Education</a>
+            <a href="#skills">Skills</a>
+            <a href="#publications">Publications</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="nav-icons">
+            <a href="mailto:idris.vruzhaj@gmail.com" class="nav-icon"><i class="fas fa-envelope"></i></a>
+            <a href="#" class="nav-icon"><i class="fab fa-linkedin"></i></a>
+            <a href="#" class="nav-icon"><i class="fab fa-github"></i></a>
+        </div>
+    </nav>
 
-\headleft{Programming Skills}
-\begin{itemize}
-\item Python (Intermediate)[cite: 3]
-\item Bash / Shell scripting[cite: 3]
-\item R (Data analysis)[cite: 3]
-\item Git (Version control)[cite: 3]
-\end{itemize}
+    <div class="hero">
+        <div class="hero-photo"><i class="fas fa-dna"></i></div>
+        <div class="hero-text">
+            <div class="hero-tag">Open to opportunities</div>
+            <h1>Idris Vruzhaj, Ph.D</h1>
+            <div class="hero-role" id="typed-role">Biotechnologist → Bioinformatician</div>
+            <p class="hero-desc">
+                Ph.D. in Pharmacological Sciences with hands-on experience in NGS pipelines, genome assembly, and computational infrastructure. Transitioning into bioinformatics with a strong biological foundation and active self-directed learning in data analysis and machine learning.
+            </p>
+            <div class="hero-badges">
+                <span class="badge">🧬 Ph.D. Padua</span>
+                <span class="badge">🐧 Linux / HPC</span>
+                <span class="badge">🐍 Python</span>
+                <span class="badge">🐳 Docker</span>
+                <span class="badge">📍 Porcia, Italy</span>
+            </div>
+        </div>
+    </div>
 
-\headleft{Workflow \& Dev Tools}
-\begin{itemize}
-\item Nextflow \& Snakemake
-\item Docker (Containerisation)[cite: 3]
-\item Linux / Ubuntu sysadmin[cite: 3]
-\item Conda / Environment mgt[cite: 3]
-\item HPC cluster environments[cite: 3]
-\end{itemize}
+    <div class="main">
+        <div class="left">
 
-\headleft{Wet Lab Skills}
-\begin{itemize}
-\item Molecular cloning (SLIC)[cite: 3]
-\item Bacterial \& cell culture[cite: 3]
-\item ELISA, flow cytometry[cite: 3]
-\item In vivo animal models[cite: 3]
-\item Protein expression[cite: 3]
-\end{itemize}
+            <section class="section" id="experience">
+                <div class="section-title">Work Experience</div>
 
-\end{minipage}%
-\kern0.09\textwidth\relax
+                <div class="exp-item">
+                    <div class="exp-header">
+                        <div class="exp-title">Bioinformatician (Research Fellow)</div>
+                        <span class="exp-date">09/2024 – present</span>
+                    </div>
+                    <div class="exp-company">Prof. Massimo Delle Donne's lab · Pordenone, Italy</div>
+                    <div class="exp-desc">
+                        <ul>
+                            <li>De novo genome assembly and structural annotation of plant genomes</li>
+                            <li>Executed multi-step NGS pipelines in Linux/HPC environments</li>
+                            <li>Handled NGS data formats (FASTQ, BAM, GFF) and QC workflows</li>
+                            <li>Leveraged AI-assisted tools for pipeline development and troubleshooting</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="exp-item">
+                    <div class="exp-header">
+                        <div class="exp-title">Postdoctoral Researcher</div>
+                        <span class="exp-date">11/2023 – 08/2024</span>
+                    </div>
+                    <div class="exp-company">CRO Aviano – National Cancer Institute · Italy</div>
+                    <div class="exp-desc">
+                        <ul>
+                            <li>Continued Ph.D. project on probiotic-based oral cancer vaccines</li>
+                            <li>Led manuscript preparation → peer-reviewed publication (Medicina, 2025)</li>
+                            <li>Contributed to oncology patent filing</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="exp-item">
+                    <div class="exp-header">
+                        <div class="exp-title">Pre-Doctoral Research Fellow</div>
+                        <span class="exp-date">09/2019 – 10/2020</span>
+                    </div>
+                    <div class="exp-company">CRO Aviano – National Cancer Institute · Italy</div>
+                    <div class="exp-desc">
+                        Development of antitumor vaccines using engineered probiotic vectors.
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="education">
+                <div class="section-title">Education</div>
+                <div class="edu-item">
+                    <div class="edu-degree">Ph.D. in Pharmacological Sciences</div>
+                    <div class="edu-uni">University of Padua / CRO Aviano</div>
+                    <div class="edu-date">2020 – 2023</div>
+                    <div class="edu-thesis">Thesis: Oral Delivery of Glypican-1 via Engineered E. coli Nissle 1917</div>
+                </div>
+                <div class="edu-item">
+                    <div class="edu-degree">M.Sc. Industrial Biotechnology (LM-8) — 96/110</div>
+                    <div class="edu-uni">University of Padua</div>
+                    <div class="edu-date">2016 – 2019</div>
+                    <div class="edu-thesis">Thesis: Post-translational protein assembly using SpyCatcher/SpyTag</div>
+                </div>
+                <div class="edu-item">
+                    <div class="edu-degree">B.Sc. Biotechnology</div>
+                    <div class="edu-uni">University of Padua</div>
+                    <div class="edu-date">2012 – 2015</div>
+                </div>
+                <div class="edu-item">
+                    <div class="edu-degree">Data Analysis in Python — Utrecht Summer School</div>
+                    <div class="edu-date">2022</div>
+                </div>
+            </section>
+
+            <section class="section" id="publications">
+                <div class="section-title">Publications & Patent</div>
+                <div class="pub-item">
+                    <div class="pub-title">Gut Microbiota-Based Immunotherapy: Engineered E. coli Nissle 1917 for Oral Delivery of Glypican-1 in Pancreatic Cancer</div>
+                    <div class="pub-journal">Medicina · March 2025 · Vruzhaj I. et al.</div>
+                </div>
+                <div class="pub-item">
+                    <div class="pub-title">Oral Administration of Cancer Vaccines: Challenges and Future Perspectives</div>
+                    <div class="pub-journal">Vaccines · December 2023 · Gambirasi M., Safa A., Vruzhaj I. et al.</div>
+                </div>
+                <div class="pub-item">
+                    <div class="pub-title">Patent Filing — Oncology field</div>
+                    <div class="pub-journal">CRO Aviano · 2023</div>
+                </div>
+            </section>
+
+        </div>
+
+        <div class="right" id="skills">
+
+            <div class="section-title">Contact</div>
+            <div style="margin-bottom: 32px;">
+                <div class="contact-item"><i class="fas fa-envelope"></i><a href="mailto:idris.vruzhaj@gmail.com">idris.vruzhaj@gmail.com</a></div>
+                <div class="contact-item"><i class="fas fa-phone"></i>+39 345 076 1301</div>
+                <div class="contact-item"><i class="fas fa-map-marker-alt"></i>Porcia (PN), Italy</div>
+                <div class="contact-item"><i class="fab fa-github"></i><a href="#">github.com/yourusername</a></div>
+                <div class="contact-item"><i class="fab fa-linkedin"></i><a href="#">LinkedIn</a></div>
+            </div>
+
+            <div class="section-title">Computational Skills</div>
+            <div class="skill-group">
+                <div class="skill-group-title">Programming</div>
+                <div class="skill-list">
+                    <span class="skill-pill highlight">Python</span>
+                    <span class="skill-pill highlight">Bash</span>
+                    <span class="skill-pill">R (basic)</span>
+                    <span class="skill-pill">Git</span>
+                </div>
+            </div>
+            <div class="skill-group">
+                <div class="skill-group-title">Infrastructure</div>
+                <div class="skill-list">
+                    <span class="skill-pill highlight">Linux/Ubuntu</span>
+                    <span class="skill-pill highlight">Docker</span>
+                    <span class="skill-pill highlight">HPC</span>
+                    <span class="skill-pill">Conda</span>
+                </div>
+            </div>
+            <div class="skill-group">
+                <div class="skill-group-title">Bioinformatics</div>
+                <div class="skill-list">
+                    <span class="skill-pill">Genome assembly</span>
+                    <span class="skill-pill">NGS pipelines</span>
+                    <span class="skill-pill">FASTQ/BAM/GFF</span>
+                    <span class="skill-pill">QC tools</span>
+                </div>
+            </div>
+            <div class="skill-group">
+                <div class="skill-group-title">Data analysis</div>
+                <div class="skill-list">
+                    <span class="skill-pill">Pandas</span>
+                    <span class="skill-pill">NumPy</span>
+                    <span class="skill-pill">Matplotlib</span>
+                    <span class="skill-pill">Scikit-learn</span>
+                </div>
+            </div>
+
+            <div class="section-title" style="margin-top: 24px;">Wet Lab</div>
+            <div class="skill-group">
+                <div class="skill-list">
+                    <span class="skill-pill">Molecular cloning</span>
+                    <span class="skill-pill">Cell culture</span>
+                    <span class="skill-pill">ELISA</span>
+                    <span class="skill-pill">Flow cytometry</span>
+                    <span class="skill-pill">Animal models</span>
+                </div>
+            </div>
+
+            <div class="section-title" style="margin-top: 24px;">Languages</div>
+            <div class="skill-list">
+                <span class="skill-pill">Italian (C2)</span>
+                <span class="skill-pill highlight">English (B2)</span>
+                <span class="skill-pill">Albanian (native)</span>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="footer-contact" id="contact">
+        <div>
+            <p>Available for opportunities in bioinformatics &amp; computational biology</p>
+            <a href="mailto:idris.vruzhaj@gmail.com">idris.vruzhaj@gmail.com</a>
+        </div>
+        <div style="display:flex; gap: 16px;">
+            <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            <a href="#"><i class="fab fa-github"></i> GitHub</a>
+        </div>
+    </div>
+
+</div>
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) t.scrollIntoView({ behavior: 'smooth' });
+    });
+});
+const roles = ['Biotechnologist → Bioinformatician', 'NGS Pipeline Developer', 'Computational Biology Explorer'];
+let ri = 0, ci = 0, del = false;
+const el = document.getElementById('typed-role');
+function type() {
+    const r = roles[ri];
+    el.textContent = del ? r.substring(0, ci-1) : r.substring(0, ci+1);
+    del ? ci-- : ci++;
+    let sp = del ? 40 : 80;
+    if (!del && ci === r.length) { sp = 2500; del = true; }
+    else if (del && ci === 0) { del = false; ri = (ri+1)%roles.length; sp = 400; }
+    setTimeout(type, sp);
 }
-\end{minipage}%
-\hskip2.5em
-\begin{minipage}[t]{0.56\textwidth}
-\setlength{\parskip}{0.8ex}
+setTimeout(type, 1200);
 
-\vspace{2ex}
-
-\headright{Work Experience}
-
-\textsc{Bioinformatician (Research Fellow).} \textit{University of Verona, Italy.} \dates{09/2024--present} \\
-\smaller{Developing and optimizing end-to-end bioinformatics pipelines for genomic analysis.} \\
-\smaller{De novo genome assembly, polishing, structural annotation, and variant calling.} \\
-\smaller{Managing large-scale genomic datasets using Nextflow and Snakemake workflow managers.} \\
-\smaller{Collaborating across interdisciplinary teams to bridge dry-lab results with biological insights.}
-
-\is
-\textsc{Postdoctoral Researcher.} \textit{CRO Aviano -- National Cancer Institute, Italy.} \dates{11/2023--08/2024} \\[cite: 3]
-\smaller{Continuation of Ph.D.\ project: probiotic-based oral cancer vaccine development.} \\[cite: 3]
-\smaller{Led manuscript preparation and coordinated multi-author revisions (Medicina, 2025).} \\
-\smaller{Contributed to patent filing in the oncology field, interfacing with clinical and technical figures.}
-
-\is
-\textsc{Pre-Doctoral Research Fellow.} \textit{CRO Aviano, Italy.} \dates{09/2019--10/2020} \\[cite: 3]
-\smaller{Development of antitumor vaccines using engineered probiotic vectors.}[cite: 3]
-
-\headright{Education}
-
-\textsc{Ph.D.\ in Pharmacological Sciences.} \textit{University of Padua / CRO Aviano.} \dates{2020--2023} \\[cite: 3]
-\smaller{Thesis: Oral Delivery of Glypican-1 via Engineered \textit{E.\ coli} Nissle 1917: An Immunogenic Anticancer Therapy Approach.} \\[cite: 3]
-\smaller{Techniques: expression vector design (SLIC), cell culture, ELISA, flow cytometry, in vivo models.}[cite: 3]
-
-\is
-\textsc{M.Sc.\ in Industrial Biotechnology (LM-8), 96/110.} \textit{University of Padua.} \dates{2016--2019} \\[cite: 3]
-\smaller{Thesis: Post-translational protein assembly using the SpyCatcher/SpyTag system.} \\[cite: 3]
-\smaller{Techniques: molecular cloning, protein expression and purification.}[cite: 3]
-
-\is
-\textsc{B.Sc.\ in Biotechnology.} \textit{University of Padua.} \dates{2012--2015} \\[cite: 3]
-\smaller{Biotechnological laboratory techniques and industrial applications.}[cite: 3]
-
-\headright{Certifications \& Continuous Training}
-
-\textsc{Data Analysis in Python.} \textit{Utrecht Summer School.} \dates{2022} \\[cite: 3]
-\smaller{Big data analysis with Python and Pandas.}[cite: 3]
-
-\is
-\textsc{The Complete Python Bootcamp: Zero to Hero.} \textit{Udemy.} \dates{2022--2023} \\[cite: 3]
-\smaller{Data analysis, automation, and application development in Python.}[cite: 3]
-
-\is
-\textsc{Self-directed study (ongoing).} \\[cite: 3]
-\smaller{Advanced statistics, probability distributions, and machine learning architectures.}
-
-\headright{Publications \& Patent}
-
-\smaller{\textbf{Vruzhaj, I.}, Gambirasi, M., Busato, D., Safa, A. (2025). Gut Microbiota-Based Immunotherapy: Engineered \textit{E.\ coli} Nissle 1917 for Oral Delivery of Glypican-1 in Pancreatic Cancer. \textit{Medicina}.}[cite: 3]
-
-\is
-\smaller{Gambirasi, M., Safa, A., \textbf{Vruzhaj, I.}, Toffoli, G. (2023). Oral Administration of Cancer Vaccines: Challenges and Future Perspectives. \textit{Vaccines}.}[cite: 3]
-
-\is
-\smaller{Patent Filing -- CRO Aviano (2023): contributed to design and development of innovative patented solutions in oncology.}[cite: 3]
-
-\headright{Homelab & Self-Hosting}
-
-\smaller{\textbf{Infrastructure:} Proxmox hypervisor deployment managing containerized networks and services.} \\
-\smaller{\textbf{Services:} Private instances of Tailscale, Pi-hole, Unbound, Immich, and Nextcloud.} \\
-\smaller{\textbf{Interests:} Home fermentation systems and continuous brew mechanics.}
-
-\end{minipage}
-
-\end{document}
+const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
+    });
+}, { threshold: 0.1 });
+document.querySelectorAll('.exp-item, .edu-item, .pub-item, .skill-group').forEach(el => {
+    el.style.opacity='0'; el.style.transform='translateY(16px)';
+    el.style.transition='opacity 0.5s ease, transform 0.5s ease';
+    obs.observe(el);
+});
+</script>
+</body>
+</html>
